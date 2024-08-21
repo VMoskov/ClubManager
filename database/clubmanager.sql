@@ -1,7 +1,3 @@
-CREATE DATABASE football_club;
-
-\c football_club;
-
 CREATE TABLE Coach (
     coach_id SERIAL PRIMARY KEY,
     first_name VARCHAR(50) NOT NULL,

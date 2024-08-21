@@ -1,4 +1,4 @@
-CREATE TABLE Coach (
+CREATE TABLE Coach IF NOT EXISTS (
     coach_id SERIAL PRIMARY KEY,
     first_name VARCHAR(50) NOT NULL,
     last_name VARCHAR(50) NOT NULL,
@@ -6,14 +6,14 @@ CREATE TABLE Coach (
     years_of_experience INTEGER
 );
 
-CREATE TABLE Team (
+CREATE TABLE Team IF NOT EXISTS (
     team_id SERIAL PRIMARY KEY,
     team_name VARCHAR(50) UNIQUE NOT NULL,
     home_stadium VARCHAR(100),
     coach_id INTEGER REFERENCES Coach(coach_id)
 );
 
-CREATE TABLE Player (
+CREATE TABLE Player IF NOT EXISTS (
     player_id SERIAL PRIMARY KEY,
     first_name VARCHAR(50) NOT NULL,
     last_name VARCHAR(50) NOT NULL,
@@ -21,7 +21,7 @@ CREATE TABLE Player (
     dominant_foot VARCHAR(20)
 );
 
-CREATE TABLE PlayerTeam (
+CREATE TABLE PlayerTeam IF NOT EXISTS (
     player_team_id SERIAL PRIMARY KEY,
     player_position VARCHAR(50),
     player_id INTEGER REFERENCES Player(player_id),

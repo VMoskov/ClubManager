@@ -18,6 +18,15 @@ def create_app(config_class=Config):
     from app.player import bp as player_bp
     app.register_blueprint(player_bp, url_prefix='/player')
 
+    from app.coach import bp as coach_bp
+    app.register_blueprint(coach_bp, url_prefix='/coach')
+
+    from app.team import bp as team_bp
+    app.register_blueprint(team_bp, url_prefix='/team')
+
+    from app.player_team import bp as player_team_bp
+    app.register_blueprint(player_team_bp, url_prefix='/player_team')
+
     @app.route('/test/')
     def test_page():
         return '<h1>Testing the Flask Application Factory Pattern</h1>'

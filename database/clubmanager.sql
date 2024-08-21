@@ -24,6 +24,7 @@ CREATE TABLE IF NOT EXISTS Player (
 CREATE TABLE IF NOT EXISTS PlayerTeam (
     player_team_id SERIAL PRIMARY KEY,
     player_position VARCHAR(50),
+    kit_number INTEGER,
     player_id INTEGER REFERENCES Player(player_id),
     team_id INTEGER REFERENCES Team(team_id)
 );

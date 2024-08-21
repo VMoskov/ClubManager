@@ -14,7 +14,8 @@ class Team(db.Model):
     
     def to_dict(self):
         return {
+            'id': self.id,
             'team_name': self.name,
             'home_stadium': self.home_stadium,
-            'coach': self.coach.name if self.coach is not None else None
+            'coach': f'{self.coach.name} {self.coach.surname}' if self.coach is not None else None
         }

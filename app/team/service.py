@@ -12,6 +12,7 @@ class TeamService:
 
         if self.already_exists(team):
             raise ValueError('Team already exists')
+        
         db.session.add(team)
         db.session.commit()
         return team
@@ -22,10 +23,7 @@ class TeamService:
         return Team.query.get(id)
     
     def is_valid(self, team):
-        if team is None \
-            or 'name' not in team \
-            or 'home_stadium' not in team \
-            or 'coach_id' not in team:
+        if team is None or not all(key in team for key in ['name', 'home_stadium', 'coach_id']):
             return False
         return True
         

@@ -2,8 +2,6 @@ from app.team import bp
 from app.team.service import TeamService
 from flask import request, jsonify
 
-from app.team.team import Team
-
 
 @bp.route('/', methods=['GET'])
 def get_all():

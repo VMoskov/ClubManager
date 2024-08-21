@@ -1,5 +1,5 @@
 export SECRET_KEY="your secret key"
-export DATABASE_URI="postgresql://username:password@host:port/database_name"
+export DATABASE_URI="postgresql://admin:admin@localhost:5433/clubmanager"
 
 export FLASK_APP=app
 export FLASK_ENV=development

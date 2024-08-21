@@ -1,4 +1,5 @@
 from flask import Blueprint
-from app.coach import routes
 
 bp = Blueprint('coach', __name__)
+
+from app.coach import routes

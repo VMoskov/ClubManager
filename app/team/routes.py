@@ -1,4 +1,3 @@
-from os import name
 from app.team import bp
 from app.team.service import TeamService
 from flask import request, jsonify

@@ -21,12 +21,17 @@ CREATE TABLE IF NOT EXISTS Player (
     dominant_foot VARCHAR(20)
 );
 
+CREATE TABLE IF NOT EXISTS Position (
+    position_id SERIAL PRIMARY KEY,
+    position_name VARCHAR(50) UNIQUE NOT NULL
+);
+
 CREATE TABLE IF NOT EXISTS PlayerTeam (
     player_team_id SERIAL PRIMARY KEY,
-    player_position VARCHAR(50),
     kit_number INTEGER,
     player_id INTEGER REFERENCES Player(player_id),
     team_id INTEGER REFERENCES Team(team_id)
+    position_id INTEGER REFERENCES Position(position_id)
 );
 
 CREATE INDEX idx_player_id ON PlayerTeam(player_id);

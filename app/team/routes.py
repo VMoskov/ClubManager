@@ -47,3 +47,14 @@ def get_players(id):
         return 'Team not found', 404
 
     return jsonify(players), 200
+
+
+@bp.route('/<int:id>/coach', methods=['GET'])
+def get_coach(id):
+    team_service = TeamService()
+    coach = team_service.get_coach(id)
+
+    if coach is None:
+        return 'Team not found', 404
+
+    return jsonify(coach), 200

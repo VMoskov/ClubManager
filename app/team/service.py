@@ -39,6 +39,14 @@ class TeamService:
                 [{'player': f'{player.name} {player.surname}', 'position': position.name, 'kit_number': kit_number} 
                  for player, position, kit_number in zip(team_players, positions, kit_numbers)]}
     
+    def get_coach(self, id):
+        team = Team.query.get(id)
+        if team is None:
+            return None
+        
+        coach = team.coach
+        return {'id': coach.id, 'name': f'{coach.name} {coach.surname}'}
+    
     def is_valid(self, team):
         if team is None or not all(key in team for key in ['name', 'home_stadium', 'coach_id']):
             return False

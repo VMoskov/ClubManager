@@ -15,6 +15,9 @@ class PlayerService:
         if player.birth_date == 'null':
             player.birth_date = None
 
+        if player.birth_date is not None and player.birth_date > db.func.current_date():
+            raise ValueError('Birth date cannot be in the future')
+
         if self.already_exists(player):
             raise ValueError('Player already exists')
         

@@ -26,4 +26,17 @@ def upgrade():
 
 
 def downgrade():
-    pass
+    # Drop all tables created by the upgrade
+    op.execute('DROP TABLE IF EXISTS coach CASCADE')
+    op.execute('DROP TABLE IF EXISTS team CASCADE')
+    op.execute('DROP TABLE IF EXISTS player CASCADE')
+
+    conn = op.get_bind()
+
+    # Get a list of all tables
+    inspector = sa.inspect(conn)
+    tables = inspector.get_table_names()
+    print(tables)
+    # Drop each table
+    for table in tables:
+        op.drop_table(table)

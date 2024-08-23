@@ -49,6 +49,15 @@ class TeamService:
         coach = team.coach
         return {'id': coach.id, 'name': f'{coach.name} {coach.surname}'}
     
+    def delete(self, id):
+        team = Team.query.get(id)
+        if team is None:
+            return None
+        
+        db.session.delete(team)
+        db.session.commit()
+        return team
+    
     def is_valid(self, team):
         if team is None or not all(key in team for key in ['name', 'home_stadium', 'coach_id']):
             return False

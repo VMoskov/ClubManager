@@ -58,3 +58,14 @@ def get_coach(id):
         return 'Team not found', 404
 
     return jsonify(coach), 200
+
+
+@bp.route('/<int:id>/delete', methods=['DELETE'])
+def delete_club(id):
+    team_service = TeamService()
+    team = team_service.delete(id)
+
+    if team is None:
+        return 'Team not found', 404
+
+    return 'Team deleted', 200

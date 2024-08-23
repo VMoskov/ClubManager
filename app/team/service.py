@@ -1,6 +1,7 @@
 from app.extensions import db
 from app.team.team import Team
 
+
 class TeamService:
     def add(self, team):
         if not self.is_valid(team):

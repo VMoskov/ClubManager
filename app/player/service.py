@@ -7,13 +7,13 @@ class PlayerService:
         if not self.is_valid(player):
             raise ValueError('Invalid player')
         
-        player = Player(name=player['name'], surname=player['surname'], birth_date=player['birth_date'], dominant_foot=player['dominant_foot'], team_id=player['team_id'])
-        
-        if player.team_id == 'null':
-            player.team_id = None
+        player = Player(name=player['name'], surname=player['surname'], birth_date=player['birth_date'], dominant_foot=player['dominant_foot'])
 
         if player.surname == 'null':
             player.surname = None
+
+        if player.birth_date == 'null':
+            player.birth_date = None
 
         if self.already_exists(player):
             raise ValueError('Player already exists')
@@ -39,7 +39,6 @@ class PlayerService:
         player.surname = new_data['surname'] if new_data['surname'] != 'null' else player.surname
         player.birth_date = new_data['birth_date'] if new_data['birth_date'] != 'null' else player.birth_date
         player.dominant_foot = new_data['dominant_foot'] if new_data['dominant_foot'] != 'null' else player.dominant_foot
-        player.team_id = new_data['team_id'] if new_data['team_id'] != 'null' else player.team_id
 
         db.session.commit()
         return player
@@ -58,4 +57,4 @@ class PlayerService:
         return True
     
     def already_exists(self, player):
-        return Player.query.filter_by(name=player['name'], surname=player['surname']).first() is not None
+        return Player.query.filter_by(name=player.name, surname=player.surname).first() is not None

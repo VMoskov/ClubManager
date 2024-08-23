@@ -33,9 +33,11 @@ class TeamService:
         entries = PlayerTeam.query.filter_by(team_id=team.id).all()
         team_players = [entry.player for entry in entries]
         positions = [entry.position for entry in entries]
-        kit_numbers = [entry.kit_number for entry in entries]        
+        kit_numbers = [entry.kit_number for entry in entries]     
 
-        return {'id': id, 'name': team.name, 'players': 
+        number_of_players = len(team_players)   
+
+        return {'id': id, 'name': team.name, 'number of players': number_of_players, 'players': 
                 [{'player': f'{player.name} {player.surname}', 'position': position.name, 'kit_number': kit_number} 
                  for player, position, kit_number in zip(team_players, positions, kit_numbers)]}
     

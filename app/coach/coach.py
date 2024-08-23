@@ -10,3 +10,10 @@ class Coach(db.Model):
 
     def __repr__(self):
         return f'<Coach {self.name} {self.surname}>'
+    
+    def to_dict(self):
+        return {'id': self.id, 
+                'name': f'{self.name} {self.surname}', 
+                'birth_date': self.birth_date, 
+                'years_of_experience': self.years_of_experience
+                }

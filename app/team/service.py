@@ -1,4 +1,3 @@
-from app import player
 from app.extensions import db
 from app.team.team import Team
 

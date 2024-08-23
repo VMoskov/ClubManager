@@ -14,7 +14,7 @@ def get_all():
 
 
 @bp.route('/<int:id>')
-def get_by_id():
+def get_by_id(id):
     player_service = PlayerService()
     player = player_service.get(id)
 
@@ -39,7 +39,7 @@ def add():
 
 
 @bp.route('/<int:id>/update', methods=['PUT'])
-def update():
+def update(id):
     player = request.get_json()
     player_service = PlayerService()
     
@@ -51,7 +51,7 @@ def update():
 
 
 @bp.route('/<int:id>/delete', methods=['DELETE'])
-def delete():
+def delete(id):
     player_service = PlayerService()
     
     try:
@@ -59,8 +59,3 @@ def delete():
         return 'Player deleted', 200
     except ValueError as e:
         return str(e), 400
-
-
-@bp.route('/<int:player_id>/assign_team/<int:team_id>', methods=['POST'])
-def assign_team():
-    ...

@@ -30,7 +30,7 @@ CREATE TABLE IF NOT EXISTS PlayerTeam (
     player_team_id SERIAL PRIMARY KEY,
     kit_number INTEGER,
     player_id INTEGER REFERENCES Player(player_id),
-    team_id INTEGER REFERENCES Team(team_id)
+    team_id INTEGER REFERENCES Team(team_id),
     position_id INTEGER REFERENCES Position(position_id)
 );
 
@@ -40,3 +40,16 @@ CREATE INDEX idx_team_id ON PlayerTeam(team_id);
 ALTER TABLE player
 ADD CONSTRAINT chk_dominant_foot CHECK (dominant_foot IN ('Left', 'Right', 'Both'));
 
+INSERT INTO Position (position_name) VALUES ('GK');
+INSERT INTO Position (position_name) VALUES ('CB');
+INSERT INTO Position (position_name) VALUES ('RB');
+INSERT INTO Position (position_name) VALUES ('LB');
+INSERT INTO Position (position_name) VALUES ('CDM');
+INSERT INTO Position (position_name) VALUES ('CM');
+INSERT INTO Position (position_name) VALUES ('CAM');
+INSERT INTO Position (position_name) VALUES ('RM');
+INSERT INTO Position (position_name) VALUES ('LM');
+INSERT INTO Position (position_name) VALUES ('RW');
+INSERT INTO Position (position_name) VALUES ('LW');
+INSERT INTO Position (position_name) VALUES ('ST');
+INSERT INTO Position (position_name) VALUES ('CF');

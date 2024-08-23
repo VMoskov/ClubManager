@@ -60,6 +60,18 @@ def get_coach(id):
     return jsonify(coach), 200
 
 
+@bp.route('/<int:id>/update', methods=['PUT'])
+def update(id):
+    team = request.get_json()
+    team_service = TeamService()
+    
+    try:
+        team_service.update(id, team)
+        return 'Team updated', 200
+    except ValueError as e:
+        return str(e), 400
+
+
 @bp.route('/<int:id>/delete', methods=['DELETE'])
 def delete_club(id):
     team_service = TeamService()

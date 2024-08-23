@@ -49,6 +49,26 @@ class TeamService:
         coach = team.coach
         return {'id': coach.id, 'name': f'{coach.name} {coach.surname}'}
     
+    def update(self, id, team):
+        if not self.is_valid(team):
+            raise ValueError('Invalid team')
+        
+        team_to_update = Team.query.get(id)
+        if team_to_update is None:
+            return None
+        
+        team_to_update.name = team['name']
+        team_to_update.home_stadium = team['home_stadium']
+        team_to_update.coach_id = team['coach_id']
+        if team_to_update.coach_id == 'null':
+            team_to_update.coach_id = None
+
+        if self.already_exists(team_to_update):
+            raise ValueError('Team already exists')
+        
+        db.session.commit()
+        return team_to_update
+    
     def delete(self, id):
         team = Team.query.get(id)
         if team is None:

@@ -28,6 +28,9 @@ def create_app(config_class=Config):
     from app.player_team import bp as player_team_bp
     app.register_blueprint(player_team_bp, url_prefix='/player_team')
 
+    from app.position import bp as position_bp
+    app.register_blueprint(position_bp, url_prefix='/position')
+
     @app.route('/test/')
     def test_page():
         return '<h1>Testing the Flask Application Factory Pattern</h1>'

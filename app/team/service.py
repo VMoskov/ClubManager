@@ -30,4 +30,3 @@ class TeamService:
         
     def already_exists(self, team):
         return db.session.query(Team).filter_by(name=team.name).first() is not None
-    

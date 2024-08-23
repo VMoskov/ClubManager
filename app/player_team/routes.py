@@ -3,11 +3,6 @@ from app.player_team.service import PlayerTeamService
 from flask import request
 
 
-@bp.route('/')
-def index():
-    return 'Welcome to the Player Team Manager!'
-
-
 @bp.route('/assign/<int:player_id>/<int:team_id>', methods=['POST'])
 def assign_player_to_team(player_id, team_id):
     body = request.get_json()

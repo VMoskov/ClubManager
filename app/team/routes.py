@@ -36,3 +36,14 @@ def add():
         return 'Team added', 201
     except ValueError as e:
         return str(e), 400
+
+
+@bp.route('/<int:id>/players', methods=['GET'])
+def get_players(id):
+    team_service = TeamService()
+    players = team_service.get_players(id)
+
+    if players is None:
+        return 'Team not found', 404
+
+    return jsonify(players), 200

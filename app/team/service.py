@@ -1,3 +1,4 @@
+from app import player
 from app.extensions import db
 from app.team.team import Team
 
@@ -22,6 +23,22 @@ class TeamService:
         if id is None:
             return Team.query.all()
         return Team.query.get(id)
+    
+    def get_players(self, id):
+        from app.player_team.player_team import PlayerTeam
+
+        team = Team.query.get(id)
+        if team is None:
+            return None
+        
+        entries = PlayerTeam.query.filter_by(team_id=team.id).all()
+        team_players = [entry.player for entry in entries]
+        positions = [entry.position for entry in entries]
+        kit_numbers = [entry.kit_number for entry in entries]        
+
+        return {'id': id, 'name': team.name, 'players': 
+                [{'player': f'{player.name} {player.surname}', 'position': position.name, 'kit_number': kit_number} 
+                 for player, position, kit_number in zip(team_players, positions, kit_numbers)]}
     
     def is_valid(self, team):
         if team is None or not all(key in team for key in ['name', 'home_stadium', 'coach_id']):

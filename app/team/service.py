@@ -1,5 +1,6 @@
 from app.extensions import db
 from app.team.team import Team
+from app.coach.coach import Coach
 
 
 class TeamService:
@@ -41,6 +42,19 @@ class TeamService:
                 [{'player': f'{player.name} {player.surname}', 'position': position.name, 'kit_number': kit_number} 
                  for player, position, kit_number in zip(team_players, positions, kit_numbers)]}
     
+    def assign_coach(self, team_id, coach_id):
+        team = Team.query.get(team_id)
+        if team is None:
+            return None
+        
+        coach = Coach.query.get(coach_id)
+        if coach is None:
+            return None
+        
+        team.coach = coach
+        db.session.commit()
+        return team
+    
     def get_coach(self, id):
         team = Team.query.get(id)
         if team is None:
@@ -48,6 +62,15 @@ class TeamService:
         
         coach = team.coach
         return {'id': coach.id, 'name': f'{coach.name} {coach.surname}'}
+    
+    def delete_coach(self, id):
+        team = Team.query.get(id)
+        if team is None:
+            return None
+        
+        team.coach = None
+        db.session.commit()
+        return team
     
     def update(self, id, team):
         if not self.is_valid(team):

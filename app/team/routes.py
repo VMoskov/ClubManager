@@ -49,6 +49,17 @@ def get_players(id):
     return jsonify(players), 200
 
 
+@bp.route('/<int:team:_id>/assign_coach/<int:coach_id>', methods=['PUT'])
+def assign_coach(team_id, coach_id):
+    team_service = TeamService()
+    team = team_service.assign_coach(team_id, coach_id)
+
+    if team is None:
+        return 'Team not found', 404
+
+    return 'Coach assigned', 200
+
+
 @bp.route('/<int:id>/coach', methods=['GET'])
 def get_coach(id):
     team_service = TeamService()
@@ -58,6 +69,17 @@ def get_coach(id):
         return 'Team not found', 404
 
     return jsonify(coach), 200
+
+
+@bp.route('/<int:id>/delete_coach', methods=['DELETE'])
+def delete_coach(id):
+    team_service = TeamService()
+    team = team_service.delete_coach(id)
+
+    if team is None:
+        return 'Team not found', 404
+
+    return 'Coach deleted', 200
 
 
 @bp.route('/<int:id>/update', methods=['PUT'])
@@ -73,7 +95,7 @@ def update(id):
 
 
 @bp.route('/<int:id>/delete', methods=['DELETE'])
-def delete_club(id):
+def delete(id):
     team_service = TeamService()
     team = team_service.delete(id)
 

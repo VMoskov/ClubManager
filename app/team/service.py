@@ -1,6 +1,7 @@
 from app.extensions import db
 from app.team.team import Team
 from app.coach.coach import Coach
+from app.position.position import Position
 
 
 class TeamService:
@@ -41,6 +42,27 @@ class TeamService:
         return {'id': id, 'name': team.name, 'number of players': number_of_players, 'players': 
                 [{'player': f'{player.name} {player.surname}', 'position': position.name, 'kit_number': kit_number} 
                  for player, position, kit_number in zip(team_players, positions, kit_numbers)]}
+    
+    def get_players_by_position(self, team_id, position_id):
+        from app.player_team.player_team import PlayerTeam
+
+        team = Team.query.get(team_id)
+        if team is None:
+            return None
+        
+        position = Position.query.get(position_id)
+        if position is None:
+            return None
+        
+        entries = PlayerTeam.query.filter_by(team_id=team.id, position_id=position.id).all()
+        team_players = [entry.player for entry in entries]
+        kit_numbers = [entry.kit_number for entry in entries]     
+
+        number_of_players = len(team_players)   
+
+        return {'id': team_id, 'name': team.name, 'number of players': number_of_players, 'players': 
+                [{'player': f'{player.name} {player.surname}', 'kit_number': kit_number} 
+                 for player, kit_number in zip(team_players, kit_numbers)]}
     
     def assign_coach(self, team_id, coach_id):
         team = Team.query.get(team_id)

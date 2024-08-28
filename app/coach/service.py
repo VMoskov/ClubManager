@@ -28,6 +28,13 @@ class CoachService:
             return Coach.query.all()
         return Coach.query.get(id)
     
+    def get_teams(self, id):
+        coach = Coach.query.get(id)
+        if coach is None:
+            return None
+        
+        return [{'id': team.id, 'name': team.name} for team in coach.teams]
+    
     def update(self, id, coach):
         if not self.is_valid(coach):
             raise ValueError('Invalid coach')

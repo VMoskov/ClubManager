@@ -36,6 +36,17 @@ def add():
         return 'Coach added', 201
     except ValueError as e:
         return str(e), 400
+    
+
+@bp.route('/<int:id>/teams', methods=['GET'])
+def get_teams(id):
+    coach_service = CoachService()
+    teams = coach_service.get_teams(id)
+
+    if teams is None:
+        return 'Coach not found', 404
+
+    return jsonify(teams), 200
 
 
 @bp.route('/update/<int:id>', methods=['PUT'])

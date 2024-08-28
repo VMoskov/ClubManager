@@ -64,6 +64,13 @@ class TeamService:
                 [{'player': f'{player.name} {player.surname}', 'kit_number': kit_number} 
                  for player, kit_number in zip(team_players, kit_numbers)]}
     
+    def get_home_stadium(self, id):
+        team = Team.query.get(id)
+        if team is None:
+            return None
+        
+        return {'id': id, 'name': team.name, 'home_stadium': team.home_stadium}
+    
     def assign_coach(self, team_id, coach_id):
         team = Team.query.get(team_id)
         if team is None:

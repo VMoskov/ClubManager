@@ -60,6 +60,17 @@ def get_players_by_position(team_id, position_id):
     return jsonify(players), 200
 
 
+@bp.route('/<int:team_id>/home_stadium', methods=['GET'])
+def get_home_stadium(team_id):
+    team_service = TeamService()
+    home_stadium = team_service.get_home_stadium(team_id)
+
+    if home_stadium is None:
+        return 'Team not found', 404
+
+    return jsonify(home_stadium), 200
+
+
 @bp.route('/<int:team:_id>/assign_coach/<int:coach_id>', methods=['PUT'])
 def assign_coach(team_id, coach_id):
     team_service = TeamService()

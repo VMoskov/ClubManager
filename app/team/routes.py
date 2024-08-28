@@ -71,7 +71,7 @@ def get_home_stadium(team_id):
     return jsonify(home_stadium), 200
 
 
-@bp.route('/<int:team:_id>/assign_coach/<int:coach_id>', methods=['PUT'])
+@bp.route('/<int:team_id>/assign_coach/<int:coach_id>', methods=['PUT'])
 def assign_coach(team_id, coach_id):
     team_service = TeamService()
     team = team_service.assign_coach(team_id, coach_id)

@@ -36,3 +36,26 @@ def add():
         return 'Coach added', 201
     except ValueError as e:
         return str(e), 400
+
+
+@bp.route('/update/<int:id>', methods=['PUT'])
+def update(id):
+    coach = request.get_json()
+    coach_service = CoachService()
+
+    try:
+        coach_service.update(id, coach)
+        return 'Coach updated', 200
+    except ValueError as e:
+        return str(e), 400
+    
+
+@bp.route('/delete/<int:id>', methods=['DELETE'])
+def delete(id):
+    coach_service = CoachService()
+    
+    try:
+        coach_service.delete(id)
+        return 'Coach deleted', 200
+    except ValueError as e:
+        return str(e), 400

@@ -44,6 +44,14 @@ class CoachService:
         db.session.commit()
         return coach_to_update
     
+    def delete(self, id):
+        coach = Coach.query.get(id)
+        if coach is None:
+            raise ValueError('Coach not found')
+        
+        db.session.delete(coach)
+        db.session
+    
     def is_valid(self, coach):
         if not isinstance(coach, dict):
             return False

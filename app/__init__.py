@@ -1,19 +1,18 @@
 from flask import Flask
-from flasgger import Swagger
 
 from config import Config
-from app.extensions import db, migrate
+from app.extensions import db, migrate, jwt, swagger
 
 
 def create_app(config_class=Config):
     app = Flask(__name__)
     app.config.from_object(config_class)
-    # Initialize Swagger here
-    swagger = Swagger(app)
 
     # Initialize Flask extensions here
     db.init_app(app)
     migrate.init_app(app, db)
+    swagger.init_app(app)
+    jwt.init_app(app)
 
     # Register blueprints here
     from app.main import bp as main_bp

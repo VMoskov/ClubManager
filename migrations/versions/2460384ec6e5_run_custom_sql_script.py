@@ -30,6 +30,10 @@ def downgrade():
     op.execute('DROP TABLE IF EXISTS coach CASCADE')
     op.execute('DROP TABLE IF EXISTS team CASCADE')
     op.execute('DROP TABLE IF EXISTS player CASCADE')
+    op.execute('DROP TABLE IF EXISTS role CASCADE')
+    op.execute('DROP TABLE IF EXISTS user CASCADE')
+    op.execute('DROP TABLE IF EXISTS position CASCADE')
+    op.execute('DROP TABLE IF EXISTS player_team CASCADE')
 
     conn = op.get_bind()
 

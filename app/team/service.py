@@ -69,7 +69,7 @@ class TeamService:
         if team is None:
             return None
         
-        return {'id': id, 'name': team.name, 'home_stadium': team.home_stadium}
+        return {'id': id, 'team': team.name, 'home_stadium': team.home_stadium}
     
     def assign_coach(self, team_id, coach_id):
         team = Team.query.get(team_id)

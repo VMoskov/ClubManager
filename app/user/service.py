@@ -1,6 +1,7 @@
 from app.extensions import db
 from app.user.user import User
 from app.role.role import Role
+from flask_jwt_extended import create_access_token
 
 
 class UserService:
@@ -81,6 +82,17 @@ class UserService:
         db.session.delete(user)
         db.session.commit()
         return user
+    
+    def authenticate(self, email, password):
+        user = User.query.filter_by(email=email).first()
+        if user is None:
+            return None
+        
+        if user.password != password:
+            return None
+        
+        access_token = create_access_token(identity=user.id, additional_claims={'email': user.email, 'roles': [role.name for role in user.roles]})
+        return access_token
     
     def is_valid(self, user):
         return 'name' in user and 'surname' in user and 'email' in user and 'password' in user

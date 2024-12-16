@@ -63,18 +63,18 @@ Current placeholder secret key is "your secret jwt key". You can change it in th
 ```json
 {
     "sub": "1",
-    "username": "admin",
+    "email": "admin@admin.com",
     "password": "admin",
-    "roles": "admin"
+    "role": "admin"
 }
 ```
 The above payload will return a JWT token that you can use to access the API as an admin: `eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxIiwiZW1haWwiOiJhZG1pbkBhZG1pbi5jb20iLCJwYXNzd29yZCI6ImFkbWluIiwicm9sZSI6ImFkbWluIn0.SF60_BhOvGHjX7tHIPxrFuZ0ScrL11vx-jrW7WthEU4`
 ```json
 {
     "sub": "2",
-    "username": "user",
+    "email": "user@user.com",
     "password": "user",
-    "roles": "user"
+    "role": "user"
 }
 ```
-The above payload will return a JWT token that you can use to access the API as a user: `eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIyIiwidXNlcm5hbWUiOiJ1c2VyIiwicGFzc3dvcmQiOiJ1c2VyIiwicm9sZXMiOiJ1c2VyIn0.bL7i1N6aQ-q-vSP_pCokopmZmlOc0DEU9_WIbBQGcNg`
+The above payload will return a JWT token that you can use to access the API as a user: `eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIyIiwiZW1haWwiOiJ1c2VyQHVzZXIuY29tIiwicGFzc3dvcmQiOiJ1c2VyIiwicm9sZSI6InVzZXIifQ.svQSZTXWoF3RvNHAIDEBPtftKlOsbD6IpOcbp_NVz8U`

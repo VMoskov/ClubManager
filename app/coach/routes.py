@@ -1,9 +1,11 @@
 from app.coach import bp
 from app.coach.service import CoachService
 from flask import request, jsonify
+from app.utils import roles_required
 
 
 @bp.route('/')
+@roles_required(['admin', 'user'])
 def get_all():
     coach_service = CoachService()
     coaches = coach_service.get()
@@ -14,6 +16,7 @@ def get_all():
 
 
 @bp.route('/<int:id>')
+@roles_required(['admin', 'user'])
 def get_by_id(id):
     coach_service = CoachService()
     coach = coach_service.get(id)
@@ -27,6 +30,7 @@ def get_by_id(id):
 
 
 @bp.route('/add', methods=['POST'])
+@roles_required(['admin'])
 def add():
     coach = request.get_json()
     coach_service = CoachService()
@@ -39,6 +43,7 @@ def add():
     
 
 @bp.route('/<int:id>/teams', methods=['GET'])
+@roles_required(['admin', 'user'])
 def get_teams(id):
     coach_service = CoachService()
     teams = coach_service.get_teams(id)
@@ -50,6 +55,7 @@ def get_teams(id):
 
 
 @bp.route('/update/<int:id>', methods=['PUT'])
+@roles_required(['admin'])
 def update(id):
     coach = request.get_json()
     coach_service = CoachService()
@@ -62,6 +68,7 @@ def update(id):
     
 
 @bp.route('/delete/<int:id>', methods=['DELETE'])
+@roles_required(['admin'])
 def delete(id):
     coach_service = CoachService()
     

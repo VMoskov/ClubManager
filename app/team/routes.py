@@ -1,9 +1,11 @@
 from app.team import bp
 from app.team.service import TeamService
 from flask import request, jsonify
+from app.utils import roles_required
 
 
 @bp.route('/', methods=['GET'])
+@roles_required(['admin', 'user'])
 def get_all():
     team_service = TeamService()
     teams = team_service.get()
@@ -14,6 +16,7 @@ def get_all():
 
 
 @bp.route('/<int:id>', methods=['GET'])
+@roles_required(['admin', 'user'])
 def get_by_id(id):
     team_service = TeamService()
     team = team_service.get(id)
@@ -27,6 +30,7 @@ def get_by_id(id):
 
 
 @bp.route('/add', methods=['POST'])
+@roles_required(['admin'])
 def add():
     team = request.get_json()
     team_service = TeamService()
@@ -39,6 +43,7 @@ def add():
 
 
 @bp.route('/<int:id>/players', methods=['GET'])
+@roles_required(['admin', 'user'])
 def get_players(id):
     team_service = TeamService()
     players = team_service.get_players(id)
@@ -50,6 +55,7 @@ def get_players(id):
 
 
 @bp.route('/<int:team_id>/players/<int:position_id>', methods=['GET'])
+@roles_required(['admin', 'user'])
 def get_players_by_position(team_id, position_id):
     team_service = TeamService()
     players = team_service.get_players_by_position(team_id, position_id)
@@ -61,6 +67,7 @@ def get_players_by_position(team_id, position_id):
 
 
 @bp.route('/<int:team_id>/home_stadium', methods=['GET'])
+@roles_required(['admin', 'user'])
 def get_home_stadium(team_id):
     team_service = TeamService()
     home_stadium = team_service.get_home_stadium(team_id)
@@ -72,6 +79,7 @@ def get_home_stadium(team_id):
 
 
 @bp.route('/<int:team_id>/assign_coach/<int:coach_id>', methods=['PUT'])
+@roles_required(['admin'])
 def assign_coach(team_id, coach_id):
     team_service = TeamService()
     team = team_service.assign_coach(team_id, coach_id)
@@ -83,6 +91,7 @@ def assign_coach(team_id, coach_id):
 
 
 @bp.route('/<int:id>/coach', methods=['GET'])
+@roles_required(['admin', 'user'])
 def get_coach(id):
     team_service = TeamService()
     coach = team_service.get_coach(id)
@@ -94,6 +103,7 @@ def get_coach(id):
 
 
 @bp.route('/<int:id>/delete_coach', methods=['DELETE'])
+@roles_required(['admin'])
 def delete_coach(id):
     team_service = TeamService()
     team = team_service.delete_coach(id)
@@ -105,6 +115,7 @@ def delete_coach(id):
 
 
 @bp.route('/<int:id>/update', methods=['PUT'])
+@roles_required(['admin'])
 def update(id):
     team = request.get_json()
     team_service = TeamService()
@@ -117,6 +128,7 @@ def update(id):
 
 
 @bp.route('/<int:id>/delete', methods=['DELETE'])
+@roles_required(['admin'])
 def delete(id):
     team_service = TeamService()
     team = team_service.delete(id)

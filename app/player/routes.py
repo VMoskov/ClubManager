@@ -1,9 +1,11 @@
 from app.player import bp
 from app.player.service import PlayerService
 from flask import request, jsonify
+from app.utils import roles_required
 
 
 @bp.route('/')
+@roles_required(['admin', 'user'])
 def get_all():
     player_service = PlayerService()
     players = player_service.get()
@@ -14,6 +16,7 @@ def get_all():
 
 
 @bp.route('/<int:id>')
+@roles_required(['admin', 'user'])
 def get_by_id(id):
     player_service = PlayerService()
     player = player_service.get(id)
@@ -27,6 +30,7 @@ def get_by_id(id):
 
 
 @bp.route('/add', methods=['POST'])
+@roles_required(['admin'])
 def add():
     player = request.get_json()
     player_service = PlayerService()
@@ -39,6 +43,7 @@ def add():
 
 
 @bp.route('/<int:id>/update', methods=['PUT'])
+@roles_required(['admin'])
 def update(id):
     player = request.get_json()
     player_service = PlayerService()
@@ -51,6 +56,7 @@ def update(id):
 
 
 @bp.route('/<int:id>/delete', methods=['DELETE'])
+@roles_required(['admin'])
 def delete(id):
     player_service = PlayerService()
     

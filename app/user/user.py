@@ -2,6 +2,8 @@ from app.extensions import db
 
 
 class User(db.Model):
+    __tablename__ = 'AppUser'
+
     id = db.Column('user_id', db.Integer, primary_key=True)
     username = db.Column('username', db.String(64), unique=True)
     email = db.Column('email', db.String(64), unique=True)

@@ -1,18 +1,18 @@
-CREATE TABLE IF NOTE EXISTS ROLE (
+CREATE TABLE IF NOT EXISTS AppRole (
     role_id SERIAL PRIMARY KEY,
     role_name VARCHAR(50) UNIQUE NOT NULL
 );
 
-CREATE TABLE IF NOT EXISTS User (
+CREATE TABLE IF NOT EXISTS AppUser (
     user_id SERIAL PRIMARY KEY,
     username VARCHAR(50) UNIQUE NOT NULL,
     pass VARCHAR(100) NOT NULL,
     email VARCHAR(100) UNIQUE NOT NULL,
     first_name VARCHAR(50) NOT NULL,
     last_name VARCHAR(50) NOT NULL,
-    birth_date DATE
-    role_id INTEGER REFERENCES Role(role_id)
-)
+    birth_date DATE,
+    role_id INTEGER REFERENCES AppRole(role_id)
+);
 
 CREATE TABLE IF NOT EXISTS Coach (
     coach_id SERIAL PRIMARY KEY,
@@ -22,7 +22,7 @@ CREATE TABLE IF NOT EXISTS Coach (
     years_of_experience INTEGER
 );
 
-CREATE TABLE IF NOT EXISTS  Team (
+CREATE TABLE IF NOT EXISTS Team (
     team_id SERIAL PRIMARY KEY,
     team_name VARCHAR(50) UNIQUE NOT NULL,
     home_stadium VARCHAR(100),
@@ -57,15 +57,15 @@ ALTER TABLE player
 ADD CONSTRAINT chk_dominant_foot CHECK (dominant_foot IN ('Left', 'Right', 'Both'));
 
 -- Roles
-INSERT INTO Role (role_name) VALUES ('ADMIN');  -- ADMIN: 1
-INSERT INTO Role (role_name) VALUES ('USER');   -- USER: 2
+INSERT INTO AppRole (role_name) VALUES ('ADMIN');  -- ADMIN: 1
+INSERT INTO AppRole (role_name) VALUES ('USER');   -- USER: 2
 
 -- Users
-INSERT INTO User (username, pass, email, first_name, last_name, birth_date, role_id)
-VALUES ('admin', 'admin', 'admin@admin.com', 'Admin', 'Admin', '2003-26-02', 1);
+INSERT INTO AppUser (username, pass, email, first_name, last_name, birth_date, role_id)
+VALUES ('admin', 'admin', 'admin@admin.com', 'Admin', 'Admin', '2003-02-26', 1);
 
-INSERT INTO User (username, pass, email, first_name, last_name, birth_date, role_id)
-VALUES ('user', 'user', 'user@user.com', 'User', 'User', '2003-26-02', 2);
+INSERT INTO AppUser (username, pass, email, first_name, last_name, birth_date, role_id)
+VALUES ('user', 'user', 'user@user.com', 'User', 'User', '2003-02-26', 2);
 
 -- Positions
 INSERT INTO Position (position_name) VALUES ('GK');

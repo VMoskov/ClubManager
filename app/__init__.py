@@ -19,6 +19,12 @@ def create_app(config_class=Config):
     from app.main import bp as main_bp
     app.register_blueprint(main_bp)
 
+    from app.role import bp as role_bp
+    app.register_blueprint(role_bp, url_prefix='/role')
+
+    from app.user import bp as user_bp
+    app.register_blueprint(user_bp, url_prefix='/user')
+
     from app.player import bp as player_bp
     app.register_blueprint(player_bp, url_prefix='/player')
 

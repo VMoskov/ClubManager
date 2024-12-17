@@ -137,7 +137,7 @@ def add():
         return str(e), 400
 
 
-@bp.route('/<int:id>/update', methods=['PUT'])
+@bp.route('/update/<int:id>', methods=['PUT'])
 @roles_required(['admin'])
 def update(id):
     '''
@@ -185,7 +185,7 @@ def update(id):
         return str(e), 400
 
 
-@bp.route('/<int:id>/delete', methods=['DELETE'])
+@bp.route('/delete/<int:id>', methods=['DELETE'])
 @roles_required(['admin'])
 def delete(id):
     '''

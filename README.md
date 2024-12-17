@@ -78,3 +78,6 @@ The above payload will return a JWT token that you can use to access the API as 
 }
 ```
 The above payload will return a JWT token that you can use to access the API as a user: `eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIyIiwiZW1haWwiOiJ1c2VyQHVzZXIuY29tIiwicGFzc3dvcmQiOiJ1c2VyIiwicm9sZSI6InVzZXIifQ.svQSZTXWoF3RvNHAIDEBPtftKlOsbD6IpOcbp_NVz8U`
+
+## API Documentation
+The API documentation is available at `http://localhost:5000/apidocs` and it is generated using Swagger UI.

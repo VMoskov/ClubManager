@@ -172,7 +172,7 @@ def get_players(id):
             description: Team not found
     '''
     team_service = TeamService()
-    players = team_service.get_players(id)
+    players = [player.to_dict() for player in team_service.get_players(id)]
 
     if players is None:
         return 'Team not found', 404
@@ -217,7 +217,7 @@ def get_players_by_position(team_id, position_id):
             description: Team not found
     '''
     team_service = TeamService()
-    players = team_service.get_players_by_position(team_id, position_id)
+    players = [player.to_dict() for player in team_service.get_players_by_position(team_id, position_id)]
 
     if players is None:
         return 'Team not found', 404
@@ -263,7 +263,7 @@ def get_home_stadium(team_id):
     if home_stadium is None:
         return 'Team not found', 404
 
-    return jsonify(home_stadium), 200
+    return jsonify(home_stadium.to_dict()), 200
 
 
 @bp.route('/<int:team_id>/assign_coach/<int:coach_id>', methods=['PUT'])
@@ -337,7 +337,7 @@ def get_coach(id):
     if coach is None:
         return 'Team not found', 404
 
-    return jsonify(coach), 200
+    return jsonify(coach.to_dict()), 200
 
 
 @bp.route('/<int:id>/delete_coach', methods=['DELETE'])

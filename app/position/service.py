@@ -4,7 +4,9 @@ from app.position.position import Position
 
 class PositionService:
     def add(self, position):
-        pass
+        db.session.add(position)
+        db.session.commit()
+        return position
 
     def get(self, id=None):
         if id is None:
